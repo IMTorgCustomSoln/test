@@ -3,7 +3,7 @@
 </template>
 
 <script>
-const pyodide = await import('./utils.js')
+//const pyodide = await import('./utils.js')
 
 /*
 pyodide.onReady(instance){

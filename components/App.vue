@@ -30,7 +30,7 @@
 //const pyodide = await import('./utils.js');
 //pyodide.init()
 
-
+import { loadPyodide } from 'pyodide';
 import { BIcon, BIconCamera } from 'bootstrap-vue';
 import ImportData from './ImportData.vue';
 //import Test from './Test.vue';
@@ -49,8 +49,15 @@ export default {
       for(const file of newFiles){
         this.files.push(file);
       }
+      loadPyodide({ indexURL: '/node_modules/pyodide/' }).then(
+        (pyodide) => {
+          console.log( pyodide.runPython(`"Hello from pyodide"`) )
+        }
+        );
+      /*
       async function main(){
         let pyodide = await loadPyodide();
+        
         await pyodide.loadPackage("micropip")
         const micropip = pyodide.pyimport("micropip");
         await micropip.install('pdfminer.six');
@@ -61,7 +68,7 @@ export default {
         ));
         console.log(pyodide.runPython("1 + 2"));
       }
-      main();
+      main();*/
     }
     /*
     showModal() {
