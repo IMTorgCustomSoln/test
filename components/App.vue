@@ -26,14 +26,15 @@
 </template>
 
 <script>
-//import pyodide from './utils.js'
-//const pyodide = await import('./utils.js');
-//pyodide.init()
+const pyodideUrl = './public'  //copied from path: './node_modules/pyodide'
 
 import { loadPyodide } from 'pyodide';
+
 import { BIcon, BIconCamera } from 'bootstrap-vue';
 import ImportData from './ImportData.vue';
 //import Test from './Test.vue';
+
+
 
 export default {
   name: '',
@@ -49,26 +50,29 @@ export default {
       for(const file of newFiles){
         this.files.push(file);
       }
-      loadPyodide({ indexURL: '/node_modules/pyodide/' }).then(
-        (pyodide) => {
-          console.log( pyodide.runPython(`"Hello from pyodide"`) )
-        }
-        );
-      /*
+      
       async function main(){
-        let pyodide = await loadPyodide();
-        
-        await pyodide.loadPackage("micropip")
+        let pyodide = await loadPyodide(
+          { indexURL: pyodideUrl }    //TODO:this must be fixed for `npm run build`
+          );
+          
+        await pyodide.loadPackage("micropip", {checkIntegrity:false})
         const micropip = pyodide.pyimport("micropip");
+
+        console.log(pyodide.runPython(`
+        import sys
+        sys.version`
+        ));
+        
         await micropip.install('pdfminer.six');
-        //let micropip = pyodide.pyimport('"pdfminer.six"');
         console.log(pyodide.runPython(`
         import pdfminer
         pdfminer.__version__`
         ));
         console.log(pyodide.runPython("1 + 2"));
+        
       }
-      main();*/
+      main();
     }
     /*
     showModal() {
