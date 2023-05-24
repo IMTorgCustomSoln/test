@@ -1,4 +1,4 @@
-import Vue, { createApp } from '@vue/compat';
+import Vue, { createApp, configureCompat  } from '@vue/compat';
 import BootstrapVue from 'bootstrap-vue';
 import App from './components/App.vue';
 
@@ -7,4 +7,4 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.use(BootstrapVue);
 const app = createApp(App);
-app.mount('#app');
+const root = app.mount('#app');

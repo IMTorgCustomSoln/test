@@ -14,6 +14,7 @@
         <ImportData v-on:set-child-data="updateParent" />
         <div>Search</div>
         <div>{{ files }}</div>
+        <Test/>
       </b-col>
     </b-row>
     <b-row>
@@ -25,8 +26,15 @@
 </template>
 
 <script>
+//import pyodide from './utils.js'
+//const pyodide = await import('./utils.js');
+//pyodide.init()
+
+
 import { BIcon, BIconCamera } from 'bootstrap-vue';
 import ImportData from './ImportData.vue';
+//import Test from './Test.vue';
+
 export default {
   name: '',
   components: {
@@ -41,6 +49,19 @@ export default {
       for(const file of newFiles){
         this.files.push(file);
       }
+      async function main(){
+        let pyodide = await loadPyodide();
+        await pyodide.loadPackage("micropip")
+        const micropip = pyodide.pyimport("micropip");
+        await micropip.install('pdfminer.six');
+        //let micropip = pyodide.pyimport('"pdfminer.six"');
+        console.log(pyodide.runPython(`
+        import pdfminer
+        pdfminer.__version__`
+        ));
+        console.log(pyodide.runPython("1 + 2"));
+      }
+      main();
     }
     /*
     showModal() {
