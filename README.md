@@ -38,7 +38,19 @@ Host files on S3 bucket so that they can be accessed.  The `file://` protocol do
 npm run dev
 ```
 
+
 ## References
 
 * Bootstrap-vue is not quite ready for Vue3 (explained [here](https://bootstrap-vue.org/vue3))
 * This Vue3 [setup](https://stackblitz.com/edit/bootstrap-vue-with-compat?file=main.js) is used
+* build SPA with Pyodide, [tutorial](https://testdriven.io/blog/build-spa-with-python-part-3/)
+
+
+## Broken Pyodide Deploy / ToDo
+
+* vite does not build with static pyodide assets in `public/` dir, [ref](https://vitejs.dev/guide/assets.html#the-public-directory), [ref](https://stackoverflow.com/questions/72631935/vue3-vite-default-is-not-exported-by-xxx)
+* vite should build index and public/ assets as a zip file, [ref](https://github.com/Ssis53/vite-plugin-zip), [ref](https://github.com/7th-Cyborg/vite-plugin-zip-pack)
+* use pyodide to read a file, line-by-line, [ref](https://stackoverflow.com/questions/75871139/read-a-file-line-by-line-in-pyodide)
+* install [pdftitle](https://github.com/metebalci/pdftitle), [pdfminer.six]()
+* make pyodide available to any component, [ref](https://stackoverflow.com/questions/75949590/how-can-i-make-loadpyodide-available-to-any-component)
+* explore alternative pyodide deploys which may solve many other problems, but may cause other difficulties for installing modules: [usePython](https://github.com/synw/usepython), [vuePython](https://github.com/synw/vuepython)
